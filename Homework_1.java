@@ -1,43 +1,44 @@
 import java.util.*;
+import java.lang.Exception;
 
 public class Homework_1 {
+    static Scanner sc = new Scanner(System.in);
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
         try
         {
-            while (homeWorkNumber(sc));
+            while (homeWorkNumber());
         }
-        catch (java.lang.Exception e) {
+        catch (Exception e) {
             System.err.print(e);
         }
         finally {
             sc.close();
         }
     }
-    static boolean homeWorkNumber(Scanner sc) {
+    static boolean homeWorkNumber() {
         try {
-            int num = (int) getNumber("ДЗ №1. Выберите номер задания от 1 до 5: (0 для выхода)", sc);
+            int num = (int) getNumber("ДЗ №1. Выберите номер задания от 1 до 5: (0 для выхода)");
             switch (num) {
                 case 0: return false;
                 case 1:
-                    number1(sc);
+                    number1();
                     break;
                 case 2:
-                    number2(sc);
+                    number2();
                     break;
                 case 3:
-                    number3(sc);
+                    number3();
                     break;
                 case 4:
-                    number4(sc);
+                    number4();
                     break;
                 case 5:
-                    number5(sc);
+                    number5();
                     break;
                 default: return true;
             }
         }
-        catch (java.util.InputMismatchException e) {
+        catch (InputMismatchException e) {
             System.err.print(e);
             System.out.println();
             return true;
@@ -45,33 +46,33 @@ public class Homework_1 {
         return true;
     }
 
-    static void number1(Scanner sc){
-        double d1 = getNumber("Введите первое число", sc);
-        double d2 = getNumber("Введите второе число", sc);
+    static void number1(){
+        double d1 = getNumber("Введите первое число");
+        double d2 = getNumber("Введите второе число");
         if (d1 == d2) {
             System.out.println("Числа равны, повторить ввод? (y)");
             if (sc.next().equals("y")) {
-                number1(sc);
+                number1();
                 return;
             }
         }
         System.out.println("Число " + (d1 > d2 ? d2 : d1) + " наименьшее");
     }
 
-    static void number2(Scanner sc){
-        double d1 = getNumber("Введите описываемое число", sc);
+    static void number2(){
+        double d1 = getNumber("Введите описываемое число");
         String s;
         if (d1 == 0) {
             s = " нулевое";
         }
         else{
-           s = d1 > 0 ? " положительное" : " отрицательное";
+            s = d1 > 0 ? " положительное" : " отрицательное";
         }
         s += d1 % 2 == 0 ? ", четное" : ", не четное";
         System.out.println("Число " + d1 + s);
     }
 
-    static void number3(Scanner sc){
+    static void number3(){
         for (int i=1; i < 11; i++){
             for(int j=1; j < 11; j++){
                 System.out.printf("%2d x%2d =%2d ",i,j,i*j);
@@ -80,16 +81,16 @@ public class Homework_1 {
         }
     }
 
-    static void number4(Scanner sc){
+    static void number4(){
         System.out.println("Введите вид прогрессии (a - арифметическая/ g - геометрическая)");
         String s = sc.next();
-        if (!(s.equals("a")) && !(s.equals("g"))) {
+        if (!s.equals("a") && !s.equals("g")) {
             System.out.println("Ошибка ввода");
             return;
         }
-        double step = getNumber("Введите шаг прогрессии", sc);
-        int num = (int)getNumber("Введите количество чисел", sc);
-        double firstNum = getNumber("Введите первый элемент прогрессии", sc);
+        double step = getNumber("Введите шаг прогрессии");
+        int num = (int)getNumber("Введите количество чисел");
+        double firstNum = getNumber("Введите первый элемент прогрессии");
 
         double summ = firstNum;
         double summprogr = firstNum;
@@ -102,8 +103,8 @@ public class Homework_1 {
         System.out.println("Сумма прогрессии: " + summprogr);
     }
 
-    static void number5(Scanner sc){
-        int year = (int)getNumber("Введите год", sc);
+    static void number5(){
+        int year = (int)getNumber("Введите год");
         if ((year % 150 == 0) || (year % 4 == 0)) {
             System.out.println("Год високосный");
         }
@@ -112,12 +113,13 @@ public class Homework_1 {
         }
     }
 
-    static double getNumber(String s, Scanner sc) {
+    static double getNumber(String s) {
         System.out.println(s);
-        if (sc.hasNextDouble()) return sc.nextDouble();
+        if (sc.hasNextDouble()) {
+            return sc.nextDouble();}
         else {
             sc.next();
-            throw new java.util.InputMismatchException();
+            throw new InputMismatchException();
         }
     }
 }
